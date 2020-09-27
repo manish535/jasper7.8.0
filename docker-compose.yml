@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  jasperreports:
+    image: jasperserver-pro:7.5.0
+    network_mode: bridge
+    container_name: jasperserver
+    #volumes:
+    #  - jasperserver:/usr/local/tomcat/webapps/jasperserver
+    ports:
+      - 7000:8080
+    extra_hosts:
+      - "test-server:172.31.1.11"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50' 
+          memory: 900M
+
+volumes:
+  jasperserver:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /root/jasper/jasperserver
